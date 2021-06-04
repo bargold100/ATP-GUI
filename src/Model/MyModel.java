@@ -188,7 +188,8 @@ import java.util.Observer;
      }
 
      //PLAYER MOVEMENTS
-     private void CheckGameOver() {
+     @Override
+     public void CheckGameOver() {
 
          //checking if the player reached the goal position
          if (this.playerRow == this.model_maze.getGoalPosition().getRowIndex() && this.playerCol == this.model_maze.getGoalPosition().getColumnIndex()) {

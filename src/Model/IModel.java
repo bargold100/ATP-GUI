@@ -6,9 +6,10 @@ import java.util.Observer;
 
 public interface IModel {
 
-    void generateMaze(int rows, int cols);
-    void updatePlayerLocation(Directions direction);
-    void solveMaze();
+    public void generateMaze(int rows, int cols);
+    public void updatePlayerLocation(Directions direction);
+    public void solveMaze();
+    public void CheckGameOver();
 
     //observable
     void assignObserver(Observer o);
