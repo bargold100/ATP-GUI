@@ -1,6 +1,7 @@
 package View;
 
 import ViewModel.MyViewModel;
+import algorithms.mazeGenerators.Maze;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -103,12 +104,22 @@ public class MyViewController extends AView implements Initializable, Observer {
             switch (change){
                 case "maze generated" -> mazeGenerated();
                 case "player moved" -> playerMoved();
-                case "maze solved" -> mazeSolved();
+                case "maze solved" -> {
+                    try {
+                        mazeSolved();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 default -> System.out.println("Not implemented change: " + change);
             }
         }
 
-        private void mazeSolved() {
+        @Override
+        public void displayMaze(Maze maze) {
+
+        }
+        private void mazeSolved() throws Exception {
             mazeDisplayer.setSolution(viewModel.getSolution());
         }
 
@@ -119,4 +130,6 @@ public class MyViewController extends AView implements Initializable, Observer {
         private void mazeGenerated() {
             mazeDisplayer.drawMaze(viewModel.getMaze());
         }
+
+
 }
