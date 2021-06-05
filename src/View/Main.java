@@ -23,7 +23,7 @@ public class Main extends Application {
 
         IModel model = new MyModel();
         MyViewModel viewModel = new MyViewModel(model);
-        MyViewController view = fxmlLoader.getController();
+        MyViewController view = fxmlLoader.getController();//not Iview?
         view.setViewModel(viewModel);
         System.out.println("hello");
     }
