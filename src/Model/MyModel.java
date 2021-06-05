@@ -1,14 +1,10 @@
 package Model;
-import ATPProjectJar.*;
 import Client.Client;
 import IO.MyDecompressorInputStream;
 import Server.Server;
 import Server.*;
 import Client.*;
-import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
-import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.Solution;
 
@@ -45,25 +41,41 @@ import java.util.Observer;
 
 
         // Starting servers
-        GeneratorServer.start();
-        SolveServer.start();
+        StartServers();
 
 
     }
 
-    @Override
+    private void StartServers(){
+        GeneratorServer.start();
+        SolveServer.start();
+    }
+     private void StopServers(){
+         GeneratorServer.stop();
+         SolveServer.stop();
+     }
+
+     @Override
+     public void exitGame() {
+         StopServers();
+         setChanged();
+         notifyObservers("exit game");
+
+     }
+
+     @Override
     public void generateMaze(int rows, int cols) {
 
 
         // creating a client that will Communicating with generatingServer
-        CommunicateWithServer_MazeGenerating(rows,cols);
+        ClientCallToGenerateMaze(rows,cols);
         setChanged();
         notifyObservers("maze generated");
         // move player to start position- in all kinds of mazes 0,0 is the start:
         movePlayer(0, 0);
     }
 
-     private void CommunicateWithServer_MazeGenerating(int rows, int cols)
+     private void ClientCallToGenerateMaze(int rows, int cols)
      {
          try
          {
@@ -108,7 +120,7 @@ import java.util.Observer;
      public void solveMaze() {
 
         // creating a client that will Communicating with SolveServer
-         CommunicateWithServer_SolveSearchProblem();
+         ClientCallToSolveMaze();
 
          setChanged();
          notifyObservers("maze solved");
@@ -116,7 +128,7 @@ import java.util.Observer;
 
 
 
-     private void CommunicateWithServer_SolveSearchProblem()
+     private void ClientCallToSolveMaze()
      {
          try
          {
@@ -156,6 +168,18 @@ import java.util.Observer;
          }
      }
 
+     public int getGoalRow(){
+        return model_maze.getGoalPosition().getRowIndex();
+     }
+     public int getGoalColumn(){
+         return model_maze.getGoalPosition().getColumnIndex();
+     }
+
+     /*
+     public void saveMaze(File compressedMaze);
+     public void loadMaze(File compressedMaze);
+     public void exitGame();*/
+
      //OBSERVABLE
     @Override
     public void assignObserver(Observer o) {
@@ -173,8 +197,8 @@ import java.util.Observer;
     }
 
     @Override
-     public Solution getSolution() {
-         return model_solution;
+     public ArrayList<AState> getSolution() throws Exception {
+         return model_solution.getSolutionPath();
      }
 
      @Override
@@ -214,51 +238,59 @@ import java.util.Observer;
             case UP -> {
                 if (CanMoveUp(playerRow,playerCol)){
                     movePlayer(playerRow - 1, playerCol);
+                    CheckGameOver();
                 }
-                CheckGameOver();
+
             }
             case DOWN -> {
                 if (CanMoveDown(playerRow,playerCol)) {
                     movePlayer(playerRow + 1, playerCol);
+                    CheckGameOver();
                 }
-                CheckGameOver();
+
             }
             case LEFT -> {
                 if (CanMoveLeft(playerRow,playerCol)) {
                     movePlayer(playerRow, playerCol - 1);
+                    CheckGameOver();
                 }
-                CheckGameOver();
+
             }
             case RIGHT -> {
                 if (CanMoveRight(playerRow,playerCol)) {
                     movePlayer(playerRow, playerCol + 1);
+                    CheckGameOver();
                 }
-                CheckGameOver();
+
             }
 
             case UPLEFT ->{
                 if (CanMoveUpLeft(playerRow,playerCol)) {
                     movePlayer(playerRow-1, playerCol -1);
+                    CheckGameOver();
                 }
-                CheckGameOver();
+
             }
             case UPRIGHT ->{
                 if (CanMoveUpRight(playerRow,playerCol)) {
                     movePlayer(playerRow-1, playerCol +1);
+                    CheckGameOver();
                 }
-                CheckGameOver();
+
             }
             case DOWNLEFT ->{
                 if (CanMoveDownLeft(playerRow,playerCol)) {
                     movePlayer(playerRow + 1, playerCol - 1);
+                    CheckGameOver();
                 }
-                CheckGameOver();
+
             }
             case DOWNRIGHT ->{
                 if (CanMoveDownRight(playerRow,playerCol)) {
                     movePlayer(playerRow + 1, playerCol + 1);
+                    CheckGameOver();
                 }
-                CheckGameOver();
+
             }
 
         }
