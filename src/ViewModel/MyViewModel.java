@@ -2,9 +2,11 @@ package ViewModel;
 
 import Model.Directions;
 import Model.IModel;
-import algorithms.search.Solution;
+import algorithms.search.AState;
 import javafx.scene.input.KeyEvent;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -51,6 +53,17 @@ public class MyViewModel extends Observable implements Observer {
         model.updatePlayerLocation(direction);
 
     }
+
+    public void exitGame() { model.exitGame(); }
+
+    //MAZE FILES
+//    public void saveMaze(File compressedMaze) {
+//    }
+//
+//    public void loadMaze(File compressedMaze) {
+//    }
+
+    //GETTERS
     public int[][] getMaze(){
         return model.getMaze();
     }
@@ -63,7 +76,7 @@ public class MyViewModel extends Observable implements Observer {
         return model.getPlayerCol();
     }
 
-    public Solution getSolution(){
+    public ArrayList<AState> getSolution() throws Exception {
         return model.getSolution();
     }
 
@@ -74,4 +87,10 @@ public class MyViewModel extends Observable implements Observer {
     public void solveMaze(){
         model.solveMaze();
     }
+
+    public int getGoalRow(){ return model.getGoalRow(); }
+
+    public int getGoalCol(){ return model.getGoalColumn(); }
+
+
 }
