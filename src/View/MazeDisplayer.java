@@ -1,6 +1,7 @@
 
 package View;
 
+        import algorithms.search.AState;
         import javafx.beans.property.IntegerProperty;
         import javafx.beans.property.SimpleStringProperty;
         import javafx.beans.property.StringProperty;
@@ -11,16 +12,20 @@ package View;
 
         import java.io.FileInputStream;
         import java.io.FileNotFoundException;
+        import java.util.ArrayList;
 
 public class MazeDisplayer extends Canvas {
     private int[][] maze;
     // player position:
+    private ArrayList<AState> solution;
     private int playerRow = 0;
     private int playerCol = 0;
     // wall and player images:
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
 
+
+    public void setSolution(ArrayList<AState> sol){this.solution = sol;}
 
     public int getPlayerRow() {
         return playerRow;
