@@ -23,12 +23,6 @@ import java.util.ResourceBundle;
 public class MyViewController extends AView implements Initializable, Observer {
 
         private MyViewModel viewModel;
-
-        public void setViewModel(MyViewModel viewModel) {
-            this.viewModel = viewModel;
-            this.viewModel.addObserver(this);
-        }
-
         public TextField textField_mazeRows;
         public TextField textField_mazeColumns;
         public MazeDisplayer mazeDisplayer;
@@ -115,10 +109,6 @@ public class MyViewController extends AView implements Initializable, Observer {
             }
         }
 
-        @Override
-        public void displayMaze(Maze maze) {
-
-        }
         private void mazeSolved() throws Exception {
             mazeDisplayer.setSolution(viewModel.getSolution());
         }

@@ -21,9 +21,9 @@ public abstract class AView implements IView {
     }
 
     //set new scene
-    public void setViewModel(MyViewModel new_view){
-        this.viewModel = new_view;
-
+    public void setViewModel(MyViewModel viewModel) {
+        this.viewModel = viewModel;
+        this.viewModel.addObserver((Observer) this);
     }
 
 }
