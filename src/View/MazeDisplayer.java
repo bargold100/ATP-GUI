@@ -23,6 +23,8 @@ public class MazeDisplayer extends Canvas {
     // wall and player images:
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
+    StringProperty imageFileNameTarget = new SimpleStringProperty();
+    StringProperty imageFileNameBackRound = new SimpleStringProperty();
 
 
     public void setSolution(ArrayList<AState> sol){this.solution = sol;}
@@ -45,9 +47,7 @@ public class MazeDisplayer extends Canvas {
         return imageFileNameWall.get();
     }
 
-    public String imageFileNameWallProperty() {
-        return imageFileNameWall.get();
-    }
+    public String imageFileNameWallProperty() { return imageFileNameWall.get(); }
 
     public void setImageFileNameWall(String imageFileNameWall) {
         this.imageFileNameWall.set(imageFileNameWall);
@@ -64,6 +64,31 @@ public class MazeDisplayer extends Canvas {
     public void setImageFileNamePlayer(String imageFileNamePlayer) {
         this.imageFileNamePlayer.set(imageFileNamePlayer);
     }
+
+    public String getImageFileNameTarget() {
+        return imageFileNameTarget.get();
+    }
+
+    public String imageFileNameTargetProperty() {
+        return imageFileNameTarget.get();
+    }
+
+    public void setImageFileNameTarget(String imageFileNameTarget) {
+        this.imageFileNameTarget.set(imageFileNameTarget);
+    }
+
+    public String getImageFileNameBackRound() {
+        return imageFileNameBackRound.get();
+    }
+
+    public String imageFileNameBackRoundProperty() {
+        return imageFileNameBackRound.get();
+    }
+
+    public void setImageFileNameBackRound(String imageFileNameBackRound) {
+        this.imageFileNameBackRound.set(imageFileNameBackRound);
+    }
+
 
     public void drawMaze(int[][] maze) {
         this.maze = maze;

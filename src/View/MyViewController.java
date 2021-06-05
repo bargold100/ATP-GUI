@@ -4,6 +4,7 @@ import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -14,13 +15,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 
+import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class MyViewController extends AView implements Initializable, Observer {
+public class MyViewController<StringProperty> extends AView implements Initializable, Observer {
 
         private MyViewModel viewModel;
         public TextField textField_mazeRows;
@@ -29,8 +31,8 @@ public class MyViewController extends AView implements Initializable, Observer {
         public Label playerRow;
         public Label playerCol;
 
-        StringProperty updatePlayerRow = new SimpleStringProperty();
-        StringProperty updatePlayerCol = new SimpleStringProperty();
+    SimpleStringProperty updatePlayerRow =  new SimpleStringProperty();
+    SimpleStringProperty updatePlayerCol = new SimpleStringProperty();
 
         public String getUpdatePlayerRow() {
             return updatePlayerRow.get();
@@ -50,8 +52,8 @@ public class MyViewController extends AView implements Initializable, Observer {
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
-            playerRow.textProperty().bind(updatePlayerRow);
-            playerCol.textProperty().bind(updatePlayerCol);
+            playerRow.textProperty().bind((ObservableValue<? extends String>) updatePlayerRow);
+            playerCol.textProperty().bind((ObservableValue<? extends String>) updatePlayerCol);
         }
 
         public void generateMaze(ActionEvent actionEvent) {
