@@ -1,7 +1,9 @@
 package Model;
 
-import algorithms.search.Solution;
+import algorithms.search.AState;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Observer;
 
 public interface IModel {
@@ -19,5 +21,14 @@ public interface IModel {
     int[][] getMaze();
     int getPlayerRow();
     int getPlayerCol();
-    Solution getSolution();
+    ArrayList<AState> getSolution() throws Exception;
+    public int getGoalRow();
+    public int getGoalColumn();
+    public void exitGame();
+
+    /*
+    public void saveMaze(File compressedMaze);
+    public void loadMaze(File compressedMaze);
+
+     */
 }
