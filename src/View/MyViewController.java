@@ -14,12 +14,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class MyViewController implements Initializable, Observer {
+public class MyViewController extends AView implements Initializable, Observer {
     public MyViewModel viewModel;
 
     public void setViewModel(MyViewModel viewModel) {
@@ -32,10 +33,12 @@ public class MyViewController implements Initializable, Observer {
     public MazeDisplayer mazeDisplayer;
     public Label playerRow;
     public Label playerCol;
+    public Alert DimentionsAlert;
 
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
-
+    StringProperty updateDimRow = new SimpleStringProperty();
+    StringProperty updateDimCol = new SimpleStringProperty();
     public String getUpdatePlayerRow() {
         return updatePlayerRow.get();
     }
@@ -57,7 +60,25 @@ public class MyViewController implements Initializable, Observer {
         playerRow.textProperty().bind(updatePlayerRow);
         playerCol.textProperty().bind(updatePlayerCol);
     }
+    public void New(ActionEvent actionEvent) throws IOException {
+        this.changeScene("DimentionsWin.fxml");
+        int rows = Integer.valueOf(textField_mazeRows.getText());
+        int cols = Integer.valueOf(textField_mazeColumns.getText());
+        viewModel.generateMaze(rows, cols);
+        mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol()); ///addeddd
 
+    }
+    public void Properties(ActionEvent actionEvent) throws IOException {
+
+        this.DimentionsAlert = new Alert(Alert.AlertType.NONE);
+        this.DimentionsAlert.setTitle("Dimentions Settings");
+        this.DimentionsAlert.contentTextProperty();
+        this.DimentionsAlert.contentTextProperty();
+        TextField textField_DimRows;
+        TextField textField_DimColumns;
+
+        this.DimentionsAlert.showAndWait();
+    }
     public void generateMaze(ActionEvent actionEvent) {
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
