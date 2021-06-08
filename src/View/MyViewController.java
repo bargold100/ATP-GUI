@@ -63,6 +63,8 @@ public class MyViewController implements Initializable, Observer {
         int cols = Integer.valueOf(textField_mazeColumns.getText());
 
         viewModel.generateMaze(rows, cols);
+
+        mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol()); ///addeddd
     }
 
     public void solveMaze(ActionEvent actionEvent) {
