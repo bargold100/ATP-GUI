@@ -70,6 +70,7 @@ public class Main extends Application {
                     }
                 }
             });
+
             client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
