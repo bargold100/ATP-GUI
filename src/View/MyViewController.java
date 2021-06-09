@@ -2,6 +2,7 @@ package View;
 
 //import Model.MazeGenerator;
 import ViewModel.MyViewModel;
+import com.sun.media.jfxmedia.events.PlayerStateListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -10,17 +11,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.media.*;
 
-import java.io.File;
-import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -28,48 +31,75 @@ import java.util.ResourceBundle;
 
 public class MyViewController extends AView implements Initializable, Observer {
 
-
-//    public void setViewModel(MyViewModel viewModel) {
-//        this.viewModel =viewModel;
-//    public void setViewModel(MyViewModel viewModel) {
-//        //this.viewModel = getViewModelStatic();
-//       this.viewModel = AView.getViewModelStatic()
-//        this.viewModel.addObserver(this);
-//    }
-
+    //screen features:
     public TextField textField_mazeRows;
     public TextField textField_mazeColumns;
     public MazeDisplayer mazeDisplayer;
     public Label playerRow;
     public Label playerCol;
-    public Alert DimentionsAlert;
-    //private Pane MyMainPane;
+    public String game_song_path = "resources\\music\\tiger.mp3";
+    //public Alert DimentionsAlert;
 
+    //music:
+
+    public  MediaPlayer mediaPlayer;
+    public  Media song;
+    private boolean checkMusic = true;
+
+    //buttons:
+    public MenuItem helpButton;
+    public Button solveButton;
+    public MenuItem exitButton;
+    public MenuItem saveButton;
+    public MenuItem loadButton;
+    public MenuItem propertiesButton;
+    public Slider volumeButton;
+
+
+    //INITIALIZATION:
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
     StringProperty updateDimRow = new SimpleStringProperty();
     StringProperty updateDimCol = new SimpleStringProperty();
+
     public String getUpdatePlayerRow() {
         return updatePlayerRow.get();
     }
 
-    public void setUpdatePlayerRow(int updatePlayerRow) {
-        this.updatePlayerRow.set(updatePlayerRow + "");
-    }
-
-    public String getUpdatePlayerCol() {
-        return updatePlayerCol.get();
-    }
-
-    public void setUpdatePlayerCol(int updatePlayerCol) {
-        this.updatePlayerCol.set(updatePlayerCol + "");
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playerRow.textProperty().bind(updatePlayerRow);
         playerCol.textProperty().bind(updatePlayerCol);
+
     }
+
+    //BUTTUNS FUNCTIONS:
+//    public void playMedia2(String song_path) throws FileNotFoundException {
+//        InputStream music = new FileInputStream(new File(song_path));
+//        AudioInputStream audio = new AudioInputStream(music);
+//
+//    }
+
+    public void playMedia(String song_path){
+//        if(mediaPlayer != null){
+//            mediaPlayer.pause();
+//        }
+        this.checkMusic = true;
+       // volumeButton.setDisable(false);
+        song = new Media(new File(song_path).toURI().toString());
+        mediaPlayer = new MediaPlayer(song);
+        mediaPlayer.setVolume(0.4);
+       // volumeButton.setValue(50);
+        mediaPlayer.play();
+    }
+
+
+
+    public void updateVolume(DragEvent dragevent){
+        mediaPlayer.setVolume(volumeButton.getValue()/100);
+    }
+
     public void New(ActionEvent actionEvent) throws IOException {
         OpenStage("DimentionsWin.fxml", actionEvent, 410, 220);
 
@@ -77,25 +107,28 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     public void Properties(ActionEvent actionEvent) throws IOException {
 
-        this.DimentionsAlert = new Alert(Alert.AlertType.NONE);
-        this.DimentionsAlert.setTitle("Dimentions Settings");
-        this.DimentionsAlert.contentTextProperty();
-        this.DimentionsAlert.contentTextProperty();
-        TextField textField_DimRows;
-        TextField textField_DimColumns;
-
-        this.DimentionsAlert.showAndWait();
+//        this.DimentionsAlert = new Alert(Alert.AlertType.NONE);
+//        this.DimentionsAlert.setTitle("Dimentions Settings");
+//        this.DimentionsAlert.contentTextProperty();
+//        this.DimentionsAlert.contentTextProperty();
+//        TextField textField_DimRows;
+//        TextField textField_DimColumns;
+//
+//        this.DimentionsAlert.showAndWait();
     }
+
     public void generateMaze(ActionEvent actionEvent) {
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
 
         viewModel.generateMaze(rows, cols);
 
-        //mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol()); ///addeddd
-       // mazeDisplayer.drawBackGround(MyMainPane);////added
+
     }
 
+//    public void VolumeSlider(){
+//
+//    }
     public void solveMaze(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Solving maze...");
@@ -127,6 +160,7 @@ public class MyViewController extends AView implements Initializable, Observer {
         mazeDisplayer.requestFocus();
     }
 
+    //UPDATE FUNCTIONS:
     @Override
     public void update(Observable o, Object arg) {
         String change = (String) arg;
@@ -155,7 +189,23 @@ public class MyViewController extends AView implements Initializable, Observer {
     private void mazeGenerated() {
         mazeDisplayer.drawMaze(viewModel.getMaze());
         mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol());
+        playMedia(game_song_path);
     }
+
+
+    //GETTERS AND SETTERS:
+    public void setUpdatePlayerRow(int updatePlayerRow) {
+        this.updatePlayerRow.set(updatePlayerRow + "");
+    }
+
+    public String getUpdatePlayerCol() {
+        return updatePlayerCol.get();
+    }
+
+    public void setUpdatePlayerCol(int updatePlayerCol) {
+        this.updatePlayerCol.set(updatePlayerCol + "");
+    }
+
 }
 
 

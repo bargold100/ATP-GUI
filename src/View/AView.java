@@ -2,6 +2,7 @@ package View;
 
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -40,15 +41,20 @@ public abstract class AView implements IView {
         }
     }
 
-    //set new scene
+
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
         this.viewModel.addObserver((Observer) this);
     }
+
     public void CloseStage(Button MyButton){
         Stage stage = (Stage) MyButton.getScene().getWindow();
         stage.close();
     }
 
-
+    @FXML
+    public void CloseWindowFromButton(Button button) {
+        Stage s = (Stage) button.getScene().getWindow();
+        s.close();
+    }
 }
