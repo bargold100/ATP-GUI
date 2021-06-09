@@ -40,6 +40,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public Label playerRow;
     public Label playerCol;
     public String game_song_path = "resources\\music\\tiger.mp3";
+    public String video_path = "resources\\videos\\finalvideo.mp4";
     //public Alert DimentionsAlert;
 
     //music:
@@ -174,7 +175,13 @@ public class MyViewController extends AView implements Initializable, Observer {
         switch (change){
             case "maze generated" -> mazeGenerated();
             case "player moved" -> playerMoved();
-            case "game over" -> playFinalVideo("resources//videos//finalvidio.mpeg");
+            case "game over" -> {
+                try {
+                    playFinalVideo(video_path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             case "maze solved" -> {
                 try {
                     mazeSolved();
@@ -214,7 +221,7 @@ public class MyViewController extends AView implements Initializable, Observer {
         this.updatePlayerCol.set(updatePlayerCol + "");
     }
 
-    public void playFinalVideo(String videoPath){
+    public void playFinalVideo(String videoPath) throws IOException {
         if(mediaPlayer != null){
             mediaPlayer.pause();
         }
@@ -222,17 +229,18 @@ public class MyViewController extends AView implements Initializable, Observer {
         VideoMediaPlayer = new MediaPlayer(video);
         mediaView = new MediaView(VideoMediaPlayer);
         VideoMediaPlayer.setAutoPlay(true);
-
-        //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("video.fxml"));
-        //Parent root = fxmlLoader.load();
-        //root.getChildrenUnmodifiable().add(mediaView);
         Group root = new Group();
         root.getChildren().add(mediaView);
         Scene scene = new Scene(root,500,400);
         Stage stage = new Stage();
-        stage.setTitle("ala beyadi");
+        stage.setTitle("!!!! You won - thanks to you the goverment will form !!!");
         stage.setScene(scene);
         stage.show();
+
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("video.fxml"));
+//        Parent root1 = fxmlLoader.load();
+//        root1.getChildrenUnmodifiable().add(mediaView);
+
         // Hide this current window (if this is what you want)
         // ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
 
