@@ -27,12 +27,15 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 public class MyViewController extends AView implements Initializable, Observer {
-    public MyViewModel viewModel;
 
-    public void setViewModel(MyViewModel viewModel) {
-        this.viewModel = viewModel;
-        this.viewModel.addObserver(this);
-    }
+
+//    public void setViewModel(MyViewModel viewModel) {
+//        this.viewModel =viewModel;
+//    public void setViewModel(MyViewModel viewModel) {
+//        //this.viewModel = getViewModelStatic();
+//       this.viewModel = AView.getViewModelStatic()
+//        this.viewModel.addObserver(this);
+//    }
 
     public TextField textField_mazeRows;
     public TextField textField_mazeColumns;
@@ -89,8 +92,8 @@ public class MyViewController extends AView implements Initializable, Observer {
 
         viewModel.generateMaze(rows, cols);
 
-        mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol()); ///addeddd
-        //mazeDisplayer.drawBackGround(MyMainPane);////added
+        //mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol()); ///addeddd
+       // mazeDisplayer.drawBackGround(MyMainPane);////added
     }
 
     public void solveMaze(ActionEvent actionEvent) {
@@ -151,6 +154,7 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     private void mazeGenerated() {
         mazeDisplayer.drawMaze(viewModel.getMaze());
+        mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol());
     }
 }
 

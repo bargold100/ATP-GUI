@@ -23,12 +23,13 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class Main extends Application {
-    //hello check
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Server GeneratorServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         GeneratorServer.start();
         generateMaze(10, 10);
+
         //===============================================
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
@@ -41,7 +42,7 @@ public class Main extends Application {
         MyViewController view = fxmlLoader.getController();//not Iview?
         view.setViewModel(viewModel);
 
-        System.out.println("hello");
+
     }
 
     public static void main(String[] args) {

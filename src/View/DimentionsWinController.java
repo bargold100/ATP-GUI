@@ -1,6 +1,7 @@
 package View;
 
 import ViewModel.MyViewModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -11,14 +12,16 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 public class DimentionsWinController extends AView implements Initializable, Observer {
-    public MyViewModel viewModel;
-    public TextField textField_mazeRows = new TextField();
-    public TextField textField_mazeColumns = new TextField();
+
+    public TextField textField_mazeRows ;
+    public TextField textField_mazeColumns;
 
     public void GetDimentions(ActionEvent actionEvent) {
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
         viewModel.generateMaze(rows, cols);
+
+
     }
     public void update(Observable o, Object arg) {
         String change = (String) arg;

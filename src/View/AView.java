@@ -14,8 +14,13 @@ import java.util.Observer;
 
 public abstract class AView implements IView {
 
+    protected static MyViewModel viewModel;
 
-    protected MyViewModel viewModel;
+    public static MyViewModel getViewModel() {
+        return viewModel;
+    }
+
+
 
     public void OpenStage(String fxmlname, ActionEvent actionEvent, int width, int hight){
         try {
@@ -27,6 +32,7 @@ public abstract class AView implements IView {
             stage.show();
             // Hide this current window (if this is what you want)
             ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -38,5 +44,6 @@ public abstract class AView implements IView {
         this.viewModel = viewModel;
         this.viewModel.addObserver((Observer) this);
     }
+
 
 }

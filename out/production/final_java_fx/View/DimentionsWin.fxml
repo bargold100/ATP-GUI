@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import View.*?>
+
 <AnchorPane prefHeight="202.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DimentionsWinController">
    <children>
-      <Button layoutX="129.0" layoutY="148.0" mnemonicParsing="false"  onMouseClicked="#GetDimentions" text="Create my maze!" />
-      <TextField layoutX="177.0" layoutY="56.0" />
-      <TextField layoutX="177.0" layoutY="96.0" />
+      <Button layoutX="129.0" layoutY="148.0" mnemonicParsing="false" onAction="#GetDimentions" onMouseClicked="#GetDimentions" text="Create my maze!" />
+      <TextField fx:id="textField_mazeRows" layoutX="177.0" layoutY="56.0" />
+      <TextField fx:id="textField_mazeColumns" layoutX="177.0" layoutY="96.0" />
       <Label layoutX="43.0" layoutY="60.0" text="Enter rows number:" />
       <Label layoutX="33.0" layoutY="100.0" text="Enter columns number:" />
    </children>
