@@ -23,7 +23,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class Main extends Application {
-
+    //hello check
     @Override
     public void start(Stage primaryStage) throws Exception {
         Server GeneratorServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
