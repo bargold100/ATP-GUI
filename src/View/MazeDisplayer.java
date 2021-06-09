@@ -8,6 +8,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
@@ -109,6 +110,10 @@ public class MazeDisplayer extends Canvas {
         this.TargetCol = col;
         draw();
     }
+
+    //public void drawBackGround(Pane MyPane){
+      //  MyPane.styleProperty().set("-fx-background-color: #0099FF");
+    //}
 
     private void draw() {
         if(maze != null){

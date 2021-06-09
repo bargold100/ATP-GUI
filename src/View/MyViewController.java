@@ -5,13 +5,19 @@ import ViewModel.MyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +40,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public Label playerRow;
     public Label playerCol;
     public Alert DimentionsAlert;
+    //private Pane MyMainPane;
 
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
@@ -61,13 +68,10 @@ public class MyViewController extends AView implements Initializable, Observer {
         playerCol.textProperty().bind(updatePlayerCol);
     }
     public void New(ActionEvent actionEvent) throws IOException {
-        this.changeScene("DimentionsWin.fxml");
-        int rows = Integer.valueOf(textField_mazeRows.getText());
-        int cols = Integer.valueOf(textField_mazeColumns.getText());
-        viewModel.generateMaze(rows, cols);
-        mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol()); ///addeddd
+        OpenStage("DimentionsWin.fxml", actionEvent, 450, 450);
 
     }
+
     public void Properties(ActionEvent actionEvent) throws IOException {
 
         this.DimentionsAlert = new Alert(Alert.AlertType.NONE);
@@ -86,6 +90,7 @@ public class MyViewController extends AView implements Initializable, Observer {
         viewModel.generateMaze(rows, cols);
 
         mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol()); ///addeddd
+        //mazeDisplayer.drawBackGround(MyMainPane);////added
     }
 
     public void solveMaze(ActionEvent actionEvent) {

@@ -338,40 +338,56 @@ import java.util.Observer;
      }
      //searching zero on the right
      private boolean CanMoveRight(int row1,int col1){
+         if(isGameOver)
+             return false;
          return (isOnMap(row1,col1+1)&&((model_maze.getMap()[row1][col1+1])==0) );
      }
      //searching zero on the left
      private boolean CanMoveLeft(int row1,int col1){
+         if(isGameOver)
+             return false;
          return ( isOnMap(row1,col1-1)&&((model_maze.getMap()[row1][col1-1])==0) );
      }
 
      //searching zero on the up side
      private boolean CanMoveUp(int row1,int col1){
+         if(isGameOver)
+             return false;
          return ( isOnMap(row1-1,col1)&&((model_maze.getMap()[row1-1][col1])==0) );
      }
 
      //searching zero on the down side
      private boolean CanMoveDown(int row1,int col1){
+         if(isGameOver)
+             return false;
          return ( isOnMap(row1+1,col1)&&((this.model_maze.getMap()[row1+1][col1])==0) );
      }
 
      //searching zero on the up-right side
      private boolean CanMoveUpRight(int row1,int col1){
+         if(isGameOver)
+             return false;
          return ( (CanMoveUp(row1,col1)&& CanMoveRight(row1-1,col1))|| (CanMoveRight(row1,col1)&&CanMoveUp(row1,col1+1)) );
      }
 
      //searching zero on the up-left side
      private boolean CanMoveUpLeft(int row1, int col1){
+         if(isGameOver)
+             return false;
          return ((CanMoveUp(row1,col1) && CanMoveLeft(row1-1,col1))||(CanMoveLeft(row1,col1) && CanMoveUp(row1,col1-1)));
      }
 
      //searching zero on the down-left side
      private boolean CanMoveDownLeft(int row1, int col1){
+         if(isGameOver)
+             return false;
          return ((CanMoveDown(row1,col1) &&CanMoveLeft(row1+1,col1) )||( CanMoveLeft(row1,col1)&&CanMoveDown(row1,col1-1) ));
      }
 
      //searching zero on the down-right side
      private boolean CanMoveDownRight(int row1, int col1){
+         if(isGameOver)
+             return false;
          return ((CanMoveDown(row1,col1) &&CanMoveRight(row1+1,col1) )||(CanMoveRight(row1,col1) &&CanMoveDown(row1,col1+1) ));
      }
 

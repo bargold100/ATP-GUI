@@ -15,6 +15,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -39,6 +40,7 @@ public class Main extends Application {
         MyViewModel viewModel = new MyViewModel(model);
         MyViewController view = fxmlLoader.getController();//not Iview?
         view.setViewModel(viewModel);
+
         System.out.println("hello");
     }
 

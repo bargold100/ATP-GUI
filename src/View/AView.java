@@ -1,8 +1,10 @@
 package View;
 
 import ViewModel.MyViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,18 +16,21 @@ public abstract class AView implements IView {
 
 
     protected MyViewModel viewModel;
-    public void changeScene(String fxmlname) throws IOException {
-        //change fxml
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource(fxmlname));
-        Parent root  = fxmlloader.load();
-        Scene OriginScene = new Scene(root);
-        Stage my_stage = new Stage();
-        my_stage.hide();
-        my_stage.setScene(OriginScene);
-        AView newView = fxmlloader.getController();
-        newView.setViewModel(this.viewModel);
-        my_stage.showAndWait();
 
+    public void OpenStage(String fxmlname, ActionEvent actionEvent, int width, int hight){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlname));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root, width, hight));
+            stage.show();
+            // Hide this current window (if this is what you want)
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //set new scene

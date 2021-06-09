@@ -1,5 +1,7 @@
 .root {
-    -fx-background-color: bisque;
+    -fx-background-image: url("backgroungknesset.JPG");
+    -fx-background-size: cover;
+
 }
 
 Button {
@@ -18,4 +20,12 @@ Button:hover {
     -fx-text-fill: -fx-text-base-color;
     -fx-alignment: CENTER;
     -fx-content-display: LEFT;
+}
+
+#MyMainPane{
+    -fx-background-image: url("./resources/photoes/backgroungknesset.JPG");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 900 506;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
