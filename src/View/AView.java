@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,6 +44,10 @@ public abstract class AView implements IView {
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
         this.viewModel.addObserver((Observer) this);
+    }
+    public void CloseStage(Button MyButton){
+        Stage stage = (Stage) MyButton.getScene().getWindow();
+        stage.close();
     }
 
 

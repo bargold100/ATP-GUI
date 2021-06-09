@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="202.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DimentionsWinController">
    <children>
-      <Button layoutX="129.0" layoutY="148.0" mnemonicParsing="false" onAction="#GetDimentions" onMouseClicked="#GetDimentions" text="Create my maze!" />
+      <Button fx:id="generatebutton" layoutX="129.0" layoutY="148.0" mnemonicParsing="false" onAction="#GetDimentions" onMouseClicked="#GetDimentions" text="Create my maze!" />
       <TextField fx:id="textField_mazeRows" layoutX="177.0" layoutY="56.0" />
       <TextField fx:id="textField_mazeColumns" layoutX="177.0" layoutY="96.0" />
       <Label layoutX="43.0" layoutY="60.0" text="Enter rows number:" />
