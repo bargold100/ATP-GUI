@@ -26,6 +26,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //static Stage prim_stage = primaryStage;
         Server GeneratorServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         GeneratorServer.start();
         generateMaze(10, 10);

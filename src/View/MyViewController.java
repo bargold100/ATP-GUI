@@ -8,6 +8,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.media.*;
+import View.Main;
 
 import javax.sound.sampled.AudioInputStream;
 import java.io.*;
@@ -45,6 +47,11 @@ public class MyViewController extends AView implements Initializable, Observer {
     public  MediaPlayer mediaPlayer;
     public  Media song;
     private boolean checkMusic = true;
+
+    //video
+    public  MediaPlayer VideoMediaPlayer;
+    public  Media video;
+    public MediaView mediaView;
 
     //buttons:
     public MenuItem helpButton;
@@ -167,6 +174,7 @@ public class MyViewController extends AView implements Initializable, Observer {
         switch (change){
             case "maze generated" -> mazeGenerated();
             case "player moved" -> playerMoved();
+            case "game over" -> playFinalVideo("resources//videos//finalvidio.mpeg");
             case "maze solved" -> {
                 try {
                     mazeSolved();
@@ -204,6 +212,30 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     public void setUpdatePlayerCol(int updatePlayerCol) {
         this.updatePlayerCol.set(updatePlayerCol + "");
+    }
+
+    public void playFinalVideo(String videoPath){
+        if(mediaPlayer != null){
+            mediaPlayer.pause();
+        }
+        video = new Media(new File(videoPath).toURI().toString());
+        VideoMediaPlayer = new MediaPlayer(video);
+        mediaView = new MediaView(VideoMediaPlayer);
+        VideoMediaPlayer.setAutoPlay(true);
+
+        //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("video.fxml"));
+        //Parent root = fxmlLoader.load();
+        //root.getChildrenUnmodifiable().add(mediaView);
+        Group root = new Group();
+        root.getChildren().add(mediaView);
+        Scene scene = new Scene(root,500,400);
+        Stage stage = new Stage();
+        stage.setTitle("ala beyadi");
+        stage.setScene(scene);
+        stage.show();
+        // Hide this current window (if this is what you want)
+        // ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+
     }
 
 }
