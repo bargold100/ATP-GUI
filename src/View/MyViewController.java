@@ -68,7 +68,7 @@ public class MyViewController extends AView implements Initializable, Observer {
         playerCol.textProperty().bind(updatePlayerCol);
     }
     public void New(ActionEvent actionEvent) throws IOException {
-        OpenStage("DimentionsWin.fxml", actionEvent, 450, 450);
+        OpenStage("DimentionsWin.fxml", actionEvent, 410, 220);
 
     }
 
