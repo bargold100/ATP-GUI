@@ -201,11 +201,15 @@ public class MyViewController extends AView implements Initializable, Observer {
         FileChooser fc = new FileChooser();
         fc.setTitle("Open maze");
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Maze files (*.maze)", "*.maze"));
-        fc.setInitialDirectory(new File("./resources"));
+        fc.setInitialDirectory(new File("./UserMazes"));
         File chosen = fc.showOpenDialog(null);
-        //...
+        viewModel.loadMaze(chosen);
     }
 
+    public void saveFile(ActionEvent actionEvent) {
+        OpenStage("SaveWin.fxml",actionEvent,420, 420);
+
+    }
     public void keyPressed(KeyEvent keyEvent) {
         viewModel.movePlayer(keyEvent);
         keyEvent.consume();
@@ -248,10 +252,18 @@ public class MyViewController extends AView implements Initializable, Observer {
                     e.printStackTrace();
                 }
             }
+            case "load" -> loaded();
+            case "save" -> saved();
             default -> System.out.println("Not implemented change: " + change);
         }
     }
 
+    private void loaded(){
+        OpenAlert("Your maze was loaded successfully!", "load maze",  "info");
+    }
+    private void saved(){
+        OpenAlert("Your maze was saved successfully!", "Save maze",  "info");
+    }
     private void mazeSolved() throws Exception {
         mazeDisplayer.setSolution(viewModel.getSolution());
     }

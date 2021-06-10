@@ -15,7 +15,6 @@ public interface IModel {
 
     //observable
     void assignObserver(Observer o);
-    //?? notify observers no need?
 
     //GETTERS AND SETTERS
     int[][] getMaze();
@@ -26,9 +25,9 @@ public interface IModel {
     public int getGoalColumn();
     public void exitGame();
 
-    /*
-    public void saveMaze(File compressedMaze);
-    public void loadMaze(File compressedMaze);
+    //FILE OPTIONS
+    public void saveMaze(File empty_file);
+    public void loadMaze(File maze_file);
 
-     */
+
 }

@@ -57,11 +57,9 @@ public class MyViewModel extends Observable implements Observer {
     public void exitGame() { model.exitGame(); }
 
     //MAZE FILES
-//    public void saveMaze(File compressedMaze) {
-//    }
-//
-//    public void loadMaze(File compressedMaze) {
-//    }
+    public void saveMaze(File empty_file) { model.saveMaze(empty_file); }
+
+    public void loadMaze(File maze_file) { model.loadMaze(maze_file); }
 
     //GETTERS
     public int[][] getMaze(){

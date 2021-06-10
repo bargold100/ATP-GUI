@@ -1,10 +1,12 @@
 package Model;
 import Client.Client;
+import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
 import Server.Server;
 import Server.*;
 import Client.*;
 import algorithms.mazeGenerators.Maze;
+import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.Solution;
 
@@ -178,10 +180,55 @@ import java.util.Observer;
          return model_maze.getGoalPosition().getColumnIndex();
      }
 
-     /*
-     public void saveMaze(File compressedMaze);
-     public void loadMaze(File compressedMaze);
-     public void exitGame();*/
+
+     public void saveMaze(File empty_file){
+         try{
+             FileOutputStream my_file = new FileOutputStream(empty_file);
+             OutputStream output = new MyCompressorOutputStream(my_file);
+             model_maze.setStartPosition(new Position(playerRow,playerCol));
+             output.write(model_maze.toByteArray());
+             output.flush();
+             output.close();
+             setChanged();
+             notifyObservers("save");
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+     }
+     public void loadMaze(File file_maze){
+
+         try{
+             //calculating the buffer size :
+             FileInputStream maze_to_read = new FileInputStream("./UserMazes/"+file_maze.getName());
+             int arr0 = (byte)maze_to_read.read();
+             int arr1 = (byte)maze_to_read.read();
+             int arr2 = (byte)maze_to_read.read();
+             int arr3 = (byte)maze_to_read.read();
+             int rows_num = arr0*255 + arr1;
+             int cols_num = arr2*255 + arr3;
+             maze_to_read.close();
+             //new reading to the buffer
+             maze_to_read = new FileInputStream("./UserMazes/"+file_maze.getName());
+             byte[] compressed_byte_maze = new byte[rows_num*cols_num+14];
+
+             InputStream my_decompressor = new MyDecompressorInputStream(maze_to_read);
+             my_decompressor.read(compressed_byte_maze);
+             my_decompressor.close();
+             maze_to_read.close();
+
+             model_maze = new Maze(compressed_byte_maze);
+             playerRow = model_maze.getStartPosition().getRowIndex();
+             playerCol= model_maze.getStartPosition().getColumnIndex();
+             setChanged();
+             notifyObservers("load");
+         }
+         catch (Exception e){
+             e.printStackTrace();
+         }
+
+     }
+
 
      //OBSERVABLE
     @Override

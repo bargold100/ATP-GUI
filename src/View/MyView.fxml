@@ -67,7 +67,7 @@
                         <Menu mnemonicParsing="false" text="File">
                             <items>
                         <MenuItem mnemonicParsing="false" onAction="#New" text="New" />
-                                <MenuItem mnemonicParsing="false" text="Save" />
+                                <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save" />
                                 <MenuItem mnemonicParsing="false" onAction="#openFile" text="Load" />
                             </items>
                         </Menu>
