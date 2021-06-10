@@ -55,7 +55,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public MediaView mediaView;
 
     //buttons:
-    public MenuItem helpButton;
+    //public MenuItem helpButton;
     public MenuItem aboutButton;
     public Button solveButton;
     public MenuItem exitButton;
@@ -63,6 +63,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public MenuItem loadButton;
     public MenuItem propertiesButton;
     public Slider volumeButton;
+    public Menu helpMenuButton;
 
 
     //INITIALIZATION:
@@ -108,6 +109,44 @@ public class MyViewController extends AView implements Initializable, Observer {
         OpenStage("DimentionsWin.fxml", actionEvent, 410, 220);
 
     }
+    //private void displayAlert(String title, String alert){
+     //   Alert displayedAlert = new Alert(Alert.AlertType.INFORMATION);
+     //   displayedAlert.setTitle(title);
+    //    displayedAlert.setContentText(alert);
+     //   displayedAlert.setHeaderText("");
+      //  DialogPane dialogPane = displayedAlert.getDialogPane();
+       // dialogPane.getStylesheets().add(getClass().getResource("alertStyle.css").toExternalForm());
+     //   dialogPane.getStyleClass().add("alertStyle");
+      //  displayedAlert.show();
+   // }
+
+    public void help(){
+        final String msg = "In this game, you are playing Yair Lapid,\n" +
+                "Your mission is to move Yair inside the maze towards the benet and built government.\n" +
+                "Use the arrow keys or the numpad to move Yair\n"+
+                "Keyboard Shortcuts:\n"+
+                "LEFT-> LEFT ARROW, S, NUMPAD4\n"+
+                "RIGHT-> RIGHT ARROW, D, NUMPAD6\n"+
+                "UP-> UP ARROW, E, NUMPAD8\n"+
+                "DOWN-> DOWN, X, NUMPAD2\n"+
+                "UP-LEFT-> W, NUMPAD7\n"+
+                "DOWN-LEFT-> Z, NUMPAD1\n"+
+                "UP-RIGHT-> R, NUMPAD3\n"+
+                "DOWN-RIGHT-> C, NUMPAD9\n"+
+                "!!! SAVE OUR GOVERMENT !!!";
+
+                OpenAlert(msg, "Help", "info");
+
+    }
+
+    public void about(){
+        final String msg = "These game produced by Bar Goldkrantz and Meital Glick,\n" +
+                "student for Data Systems Engineering in BGU";
+
+        OpenAlert(msg, "About", "info");
+
+    }
+
 
     public void Properties(ActionEvent actionEvent) throws IOException {
 
@@ -229,7 +268,7 @@ public class MyViewController extends AView implements Initializable, Observer {
         root.getChildren().add(mediaView);
         Scene scene = new Scene(root,420,420);
         Stage stage = new Stage();
-        stage.setTitle("!!!! You won - thanks to you the goverment will form !!!");
+        stage.setTitle("thanks to you the goverment will form !!!");
         stage.setScene(scene);
         stage.show();
 
