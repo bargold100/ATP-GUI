@@ -226,7 +226,10 @@ public class MyViewController extends AView implements Initializable, Observer {
     }
 
     public void ExitGame(){
-
+        if(mediaPlayer != null)
+            mediaPlayer.stop();
+        if(VideoMediaPlayer != null)
+            VideoMediaPlayer.stop();
         viewModel.exitGame();
     }
 
