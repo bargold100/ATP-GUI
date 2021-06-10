@@ -21,8 +21,20 @@ public class DimentionsWinController extends AView implements Initializable, Obs
 
 
     public void GetDimentions(ActionEvent actionEvent) {
+        if(!(isNumeric(textField_mazeRows.getText())) || !(isNumeric(textField_mazeColumns.getText()))){
+            final String msg = "One or more of the information entered is not an integer,\n"+
+                    "please enter an int value";
+            OpenAlert(msg, "Error", "error");
+            return;
+        }
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
+        if(rows<2 || cols<2){
+            final String msg = "One or more of the information entered is invalid,\n"+
+                    "please enter a value greater than 1";
+            OpenAlert(msg, "Error", "error");
+            return;
+        }
         viewModel.generateMaze(rows, cols);
         CloseStage(generatebutton);
 

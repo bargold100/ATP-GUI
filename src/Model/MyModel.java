@@ -51,8 +51,11 @@ import java.util.Observer;
         SolveServer.start();
     }
      private void StopServers(){
+         System.out.println("befor stopping");
          GeneratorServer.stop();
+         System.out.println("after one stop server");
          SolveServer.stop();
+         System.out.println("after two stop server");
      }
 
      @Override

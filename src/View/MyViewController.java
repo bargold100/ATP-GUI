@@ -3,11 +3,13 @@ package View;
 //import Model.MazeGenerator;
 import ViewModel.MyViewModel;
 import com.sun.media.jfxmedia.events.PlayerStateListener;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -26,6 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.media.*;
@@ -50,6 +53,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public String game_song_path = "resources\\music\\tiger.mp3";
     public String video_path = "resources\\videos\\finalvideo.mp4";
     //public Alert DimentionsAlert;
+    HBox hbox;
 
     //music:
 
@@ -66,6 +70,7 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     public MenuItem aboutButton;
     public Button solveButton;
+    public Button exitb;
     public MenuItem exitButton;
     public MenuItem saveButton;
     public MenuItem loadButton;
@@ -163,9 +168,20 @@ public class MyViewController extends AView implements Initializable, Observer {
     }
 
     public void generateMaze(ActionEvent actionEvent) {
+        if(!(isNumeric(textField_mazeRows.getText())) || !(isNumeric(textField_mazeColumns.getText()))){
+            final String msg = "One or more of the information entered is not an integer,\n"+
+                    "please enter an int value";
+            OpenAlert(msg, "Error", "error");
+            return;
+        }
         int rows = Integer.valueOf(textField_mazeRows.getText());
         int cols = Integer.valueOf(textField_mazeColumns.getText());
-
+        if(rows<2 || cols<2){
+            final String msg = "One or more of the information entered is invalid,\n"+
+                    "please enter a value greater than 1";
+            OpenAlert(msg, "Error", "error");
+            return;
+        }
         viewModel.generateMaze(rows, cols);
 
 
@@ -205,6 +221,11 @@ public class MyViewController extends AView implements Initializable, Observer {
         mazeDisplayer.requestFocus();
     }
 
+    public void ExitGame(){
+
+        viewModel.exitGame();
+    }
+
     //UPDATE FUNCTIONS:
     @Override
     public void update(Observable o, Object arg) {
@@ -212,6 +233,7 @@ public class MyViewController extends AView implements Initializable, Observer {
         switch (change){
             case "maze generated" -> mazeGenerated();
             case "player moved" -> playerMoved();
+            case "exit game" -> Platform.exit();
             case "game over" -> {
                 try {
                     playFinalVideo(video_path);

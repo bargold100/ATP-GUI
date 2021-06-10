@@ -62,6 +62,14 @@ public abstract class AView implements IView {
             alert=null;
     }
 
+    public static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
 
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;

@@ -44,6 +44,7 @@
                     <Label fx:id="playerRow" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <Label fx:id="playerCol" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 </GridPane>
+            <Button fx:id="exitb" mnemonicParsing="false" onAction="#ExitGame" prefHeight="25.0" prefWidth="167.0" text="Exit" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -51,7 +52,7 @@
         </VBox>
     </left>
     <bottom>
-        <HBox BorderPane.alignment="CENTER">
+        <HBox fx:id="hbox" BorderPane.alignment="CENTER">
             <children>
                 <Label text="Volume " />
             <Slider fx:id="volumeButton" onDragDetected="#updateVolume" onDragDone="#updateVolume" onDragDropped="#updateVolume" onMouseDragged="#updateVolume" onSwipeLeft="#updateVolume" onSwipeRight="#updateVolume" style="-fx-background-insets: DARKCYAN;" />
