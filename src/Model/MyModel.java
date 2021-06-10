@@ -62,93 +62,59 @@ import java.util.Observer;
          notifyObservers("exit game");
 
      }
+
      @Override
-     public void generateMaze(int rows, int cols) {
-         try {
-             Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy() {
+    public void generateMaze(int rows, int cols) {
+
+
+        // creating a client that will Communicating with generatingServer
+        ClientCallToGenerateMaze(rows,cols);
+        setChanged();
+        notifyObservers("maze generated");
+        // move player to start position- in all kinds of mazes 0,0 is the start:
+        movePlayer(0, 0);
+    }
+
+     private void ClientCallToGenerateMaze(int rows, int cols)
+     {
+         try
+         {
+             Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy()
+             {
                  @Override
-                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
-                     try {
+                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer)
+                 {
+                     try
+                     {
                          ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                          ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                          toServer.flush();
-                         int[] mazeDimensions = new int[]{rows, cols};
-                         toServer.writeObject(mazeDimensions); //send mazedimensions to server
+                         int[] mazeDimensions = new int[] {rows, cols};
+                         toServer.writeObject(mazeDimensions);  // Send maze dimensions to server
                          toServer.flush();
-                         byte[] compressedMaze = (byte[])fromServer.readObject(); //read generated maze (compressed withMyCompressor) from server
+                         byte[] compressedMaze = (byte[]) fromServer.readObject();  // Read generated maze (compressed with MyCompressor) from server
                          InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                         byte[] decompressedMaze = new byte[3000]; //allocating byte[] for the decompressedmaze -
-                         is.read(decompressedMaze); //Fill decompressedMaze25 | P a g ewith bytes
+                         byte[] decompressedMaze = new byte[3000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/];  // Allocating byte[] for the decompressed maze
+                         is.read(decompressedMaze);  // Fill decompressedMaze with bytes
                          model_maze = new Maze(decompressedMaze);
-                         model_maze.print();
 
-                     } catch (Exception e) {
+                         //updating the  maze field
+
+                         model_maze.print();
+                     }
+                     catch (Exception e)
+                     {
                          e.printStackTrace();
                      }
                  }
              });
              client.communicateWithServer();
-         } catch (UnknownHostException e) {
+         }
+         catch (UnknownHostException e)
+         {
              e.printStackTrace();
          }
-
-         setChanged();
-         notifyObservers("maze generated");
-         // start position:
-         movePlayer(0, 0);
      }
-//     @Override
-//    public void generateMaze(int rows, int cols) {
-//
-//
-//        // creating a client that will Communicating with generatingServer
-//        ClientCallToGenerateMaze(rows,cols);
-//        setChanged();
-//        notifyObservers("maze generated");
-//        // move player to start position- in all kinds of mazes 0,0 is the start:
-//        movePlayer(0, 0);
-//    }
-//
-//     private void ClientCallToGenerateMaze(int rows, int cols)
-//     {
-//         try
-//         {
-//             Client client = new Client(InetAddress.getByName("127.0.0.1"), 5400, new IClientStrategy()
-//             {
-//                 @Override
-//                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer)
-//                 {
-//                     try
-//                     {
-//                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
-//                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
-//                         toServer.flush();
-//                         int[] mazeDimensions = new int[] {rows, cols};
-//                         toServer.writeObject(mazeDimensions);  // Send maze dimensions to server
-//                         toServer.flush();
-//                         byte[] compressedMaze = (byte[]) fromServer.readObject();  // Read generated maze (compressed with MyCompressor) from server
-//                         InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-//                         byte[] decompressedMaze = new byte[3000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/];  // Allocating byte[] for the decompressed maze
-//                         is.read(decompressedMaze);  // Fill decompressedMaze with bytes
-//                         model_maze = new Maze(decompressedMaze);
-//
-//                         //updating the  maze field
-//
-//                         model_maze.print();
-//                     }
-//                     catch (Exception e)
-//                     {
-//                         e.printStackTrace();
-//                     }
-//                 }
-//             });
-//             client.communicateWithServer();
-//         }
-//         catch (UnknownHostException e)
-//         {
-//             e.printStackTrace();
-//         }
-//     }
 
      @Override
      public void solveMaze() {

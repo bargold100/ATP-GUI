@@ -13,9 +13,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
@@ -25,6 +32,7 @@ import javafx.scene.media.*;
 import View.Main;
 
 import javax.sound.sampled.AudioInputStream;
+import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.Observable;
@@ -55,7 +63,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public MediaView mediaView;
 
     //buttons:
-    //public MenuItem helpButton;
+
     public MenuItem aboutButton;
     public Button solveButton;
     public MenuItem exitButton;
@@ -85,6 +93,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     }
 
     //BUTTUNS FUNCTIONS:
+
 
     public void playMedia(String song_path){
         if(mediaPlayer != null){
@@ -150,14 +159,7 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     public void Properties(ActionEvent actionEvent) throws IOException {
 
-//        this.DimentionsAlert = new Alert(Alert.AlertType.NONE);
-//        this.DimentionsAlert.setTitle("Dimentions Settings");
-//        this.DimentionsAlert.contentTextProperty();
-//        this.DimentionsAlert.contentTextProperty();
-//        TextField textField_DimRows;
-//        TextField textField_DimColumns;
-//
-//        this.DimentionsAlert.showAndWait();
+
     }
 
     public void generateMaze(ActionEvent actionEvent) {
