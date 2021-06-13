@@ -53,6 +53,9 @@ public class MazeDisplayer extends Canvas {
         this.solution = sol;
         draw();
     }
+    public int[][] getMaze(){
+        return maze;
+    }
 
     public String getImageFileNameWall() {
         return imageFileNameWall.get();
@@ -115,7 +118,7 @@ public class MazeDisplayer extends Canvas {
       //  MyPane.styleProperty().set("-fx-background-color: #0099FF");
     //}
 
-    private void draw() {
+    public void draw() {
         if(maze != null){
             double canvasHeight = getHeight();
             double canvasWidth = getWidth();

@@ -6,9 +6,11 @@ import com.sun.media.jfxmedia.events.PlayerStateListener;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -24,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 //import javafx.scene.media.Media;
@@ -52,7 +55,8 @@ public class MyViewController extends AView implements Initializable, Observer {
     public Label playerCol;
     public String game_song_path = "resources\\music\\tiger.mp3";
     public String video_path = "resources\\videos\\finalvideo.mp4";
-    //public Alert DimentionsAlert;
+    public BorderPane borderPane;
+
     HBox hbox;
 
     //music:
@@ -234,6 +238,31 @@ public class MyViewController extends AView implements Initializable, Observer {
         System.exit(0);
 
     }
+
+
+    public void SetWindowSize(Stage my_stage){
+        mazeDisplayer.setWidth(borderPane.getWidth()*0.8);
+        my_stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double sub= newVal.doubleValue()-oldVal.doubleValue();
+                mazeDisplayer.setWidth(sub+mazeDisplayer.getWidth());
+                if (mazeDisplayer.getMaze() != null) {
+                    mazeDisplayer.draw();
+                }
+
+        });
+
+        mazeDisplayer.setHeight(borderPane.getHeight()*0.9);
+        my_stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            double sub= (newVal.doubleValue()-oldVal.doubleValue());
+            mazeDisplayer.setHeight(sub+mazeDisplayer.getHeight());
+            if (mazeDisplayer.getMaze() != null) {
+                mazeDisplayer.draw();
+            }
+
+        });
+
+    }
+
 
     //UPDATE FUNCTIONS:
     @Override
