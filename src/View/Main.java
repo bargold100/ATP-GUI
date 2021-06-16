@@ -64,16 +64,6 @@ public class Main extends Application {
 
             }
 
-       // primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
-         //   double delta= newVal.doubleValue()-oldVal.doubleValue();
-          //  view.resizeWidth(delta);
-       // });
-
-       // primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
-           // double delta= (newVal.doubleValue()-oldVal.doubleValue());
-           // view.resizeHeight(delta);
-
-       // });
 
 
     public static void main(String[] args) {

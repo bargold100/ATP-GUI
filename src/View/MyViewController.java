@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.beans.value.ChangeListener;
@@ -36,6 +37,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.media.*;
 import View.Main;
+import javafx.stage.WindowEvent;
 
 import javax.sound.sampled.AudioInputStream;
 import java.awt.*;
@@ -82,6 +84,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public Slider volumeButton;
     public Menu helpMenuButton;
     public boolean IsMazeDrown = false;
+    public ToggleButton muteButton;
 
 
     //INITIALIZATION:
@@ -312,8 +315,15 @@ public class MyViewController extends AView implements Initializable, Observer {
         }
     }
     public void muteMusic(){
-        if(mediaPlayer != null){
-            mediaPlayer.pause();
+        if(muteButton.isSelected()) {
+            if (mediaPlayer != null) {
+                mediaPlayer.pause();
+                muteButton.setText("unmute");
+            }
+        }
+        else{
+            mediaPlayer.play();
+            muteButton.setText("mute");
         }
     }
 
@@ -378,6 +388,13 @@ public class MyViewController extends AView implements Initializable, Observer {
         stage.setTitle("thanks to you the goverment will form !!!");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                System.out.println("Stage is closing");
+                stage.close();
+                System.exit(0);
+            }
+        });
 
 
     }
