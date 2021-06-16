@@ -392,7 +392,8 @@ public class MyViewController extends AView implements Initializable, Observer {
             public void handle(WindowEvent we) {
                 System.out.println("Stage is closing");
                 stage.close();
-                System.exit(0);
+                VideoMediaPlayer.stop();
+
             }
         });
 
