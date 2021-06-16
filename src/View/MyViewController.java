@@ -81,6 +81,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public MenuItem propertiesButton;
     public Slider volumeButton;
     public Menu helpMenuButton;
+    public boolean IsMazeDrown = false;
 
 
     //INITIALIZATION:
@@ -189,15 +190,13 @@ public class MyViewController extends AView implements Initializable, Observer {
         viewModel.generateMaze(rows, cols);
 
 
+
     }
 
 //    public void VolumeSlider(){
 //
 //    }
     public void solveMaze(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Solving maze...");
-        alert.show();
         viewModel.solveMaze();
     }
 
@@ -219,7 +218,7 @@ public class MyViewController extends AView implements Initializable, Observer {
         keyEvent.consume();
     }
 
-    public void setPlayerPosition(int row, int col){
+    public void setPlayerPosition(int row, int col) throws FileNotFoundException {
         mazeDisplayer.setPlayerPosition(row, col);
         setUpdatePlayerRow(row);
         setUpdatePlayerCol(col);
@@ -246,7 +245,11 @@ public class MyViewController extends AView implements Initializable, Observer {
             double sub= newVal.doubleValue()-oldVal.doubleValue();
                 mazeDisplayer.setWidth(sub+mazeDisplayer.getWidth());
                 if (mazeDisplayer.getMaze() != null) {
-                    mazeDisplayer.draw();
+                    try {
+                        mazeDisplayer.draw();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
 
         });
@@ -256,7 +259,11 @@ public class MyViewController extends AView implements Initializable, Observer {
             double sub= (newVal.doubleValue()-oldVal.doubleValue());
             mazeDisplayer.setHeight(sub+mazeDisplayer.getHeight());
             if (mazeDisplayer.getMaze() != null) {
-                mazeDisplayer.draw();
+                try {
+                    mazeDisplayer.draw();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
 
         });
@@ -269,8 +276,20 @@ public class MyViewController extends AView implements Initializable, Observer {
     public void update(Observable o, Object arg) {
         String change = (String) arg;
         switch (change){
-            case "maze generated" -> mazeGenerated();
-            case "player moved" -> playerMoved();
+            case "maze generated" -> {
+                try {
+                    mazeGenerated();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            case "player moved" -> {
+                try {
+                    playerMoved();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
             case "exit game" -> Platform.exit();
             case "game over" -> {
                 try {
@@ -299,17 +318,25 @@ public class MyViewController extends AView implements Initializable, Observer {
         OpenAlert("Your maze was saved successfully!", "Save maze",  "info");
     }
     private void mazeSolved() throws Exception {
-        mazeDisplayer.setSolution(viewModel.getSolution());
+        //only if a maze is drown you can show maze
+        if (IsMazeDrown= true) {
+            mazeDisplayer.setSolution(viewModel.getSolution());
+        }
+
     }
 
-    private void playerMoved() {
+    private void playerMoved() throws FileNotFoundException {
         setPlayerPosition(viewModel.getPlayerRow(), viewModel.getPlayerCol());
     }
 
-    private void mazeGenerated() {
+    private void mazeGenerated() throws FileNotFoundException {
         mazeDisplayer.drawMaze(viewModel.getMaze());
         mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol());
         playMedia(game_song_path);
+        IsMazeDrown= true;
+        this.mazeDisplayer.setSolution(null);
+        this.mazeDisplayer.setHasSolution(false);
+        this.solveButton.setDisable(false);
     }
 
 
