@@ -295,6 +295,7 @@ public class MyViewController extends AView implements Initializable, Observer {
                 try {
                     playFinalVideo(video_path);
                 } catch (IOException e) {
+                    System.out.println("CATCH!!!");
                     e.printStackTrace();
                 }
             }
@@ -331,7 +332,9 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     private void mazeGenerated() throws FileNotFoundException {
         mazeDisplayer.drawMaze(viewModel.getMaze());
+
         mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol());
+        mazeDisplayer.setPlayerPosition(0,0);
         playMedia(game_song_path);
         IsMazeDrown= true;
         this.mazeDisplayer.setSolution(null);

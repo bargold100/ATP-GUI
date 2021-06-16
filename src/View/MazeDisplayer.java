@@ -156,13 +156,41 @@ public class MazeDisplayer extends Canvas {
 
             drawMazeWalls(graphicsContext, cellHeight, cellWidth, rows, cols);
             drawTarget(graphicsContext, cellHeight, cellWidth);
+            if(solution != null) {
+                drawSolution(graphicsContext, cellHeight, cellWidth);
+                drawTarget(graphicsContext, cellHeight, cellWidth);
+            }
+            drawPlayer(graphicsContext, cellHeight, cellWidth);
+        }
+    }
+
+/*
+        if(maze != null){
+            double canvasHeight = getHeight();
+            double canvasWidth = getWidth();
+            int rows = maze.length;
+            int cols = maze[0].length;
+
+            double cellHeight = canvasHeight / rows;
+            double cellWidth = canvasWidth / cols;
+
+            GraphicsContext graphicsContext = getGraphicsContext2D();
+            //clear the canvas:
+            graphicsContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            drawMazeWalls(graphicsContext, cellHeight, cellWidth, rows, cols);
+
+
 //            if(solution != null) {
 //                drawSolution(graphicsContext, cellHeight, cellWidth);
 //
 //            }
+            drawPlayer(graphicsContext, cellHeight, cellWidth);
+            drawTarget(graphicsContext, cellHeight, cellWidth);
             if(hasSolution){
                 this.drawSolution(graphicsContext, cellHeight, cellWidth);
                 drawTarget(graphicsContext, cellHeight, cellWidth);
+
             }
             drawPlayer(graphicsContext, cellHeight, cellWidth);
 //            if(hasSolution){
@@ -170,7 +198,11 @@ public class MazeDisplayer extends Canvas {
 //            }
 
         }
+
+
+
     }
+  */
 
     private void drawSolution(GraphicsContext graphicsContext, double cellHeight, double cellWidth) throws FileNotFoundException {
         // need to be implemented
