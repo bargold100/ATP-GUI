@@ -311,6 +311,11 @@ public class MyViewController extends AView implements Initializable, Observer {
             default -> System.out.println("Not implemented change: " + change);
         }
     }
+    public void muteMusic(){
+        if(mediaPlayer != null){
+            mediaPlayer.pause();
+        }
+    }
 
     private void loaded(){
         OpenAlert("Your maze was loaded successfully!", "load maze",  "info");

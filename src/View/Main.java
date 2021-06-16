@@ -54,22 +54,13 @@ public class Main extends Application {
         view.setViewModel(viewModel);
         view.SetWindowSize(primaryStage);
 
-               // String msg ="Are you sure you want to leave before forming a government?";
-                //view.OpenAlert(msg, "Exit Game", "war");
-              //  Alert alert = new Alert(Alert.AlertType.WARNING);
-                //alert.setContentText(msg);
-                //alert.setTitle("Exit Game");
-                //alert.setHeaderText(null);
-              //  alert.show();
-               // alert=null;
-                //Optional<ButtonType> result = alert.showAndWait();
-               // if(!result.isPresent()){
-                    // alert is exited, no button has been pressed.
-                //}
-              //  else if(result.get() == ButtonType.OK) {
-                    //oke button is pressed
-                //    view.ExitGame();
-              // }
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                System.out.println("Stage is closing");
+                primaryStage.close();
+                System.exit(0);
+            }
+        });
 
             }
 
