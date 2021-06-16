@@ -337,7 +337,6 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     private void mazeGenerated() throws FileNotFoundException {
         mazeDisplayer.drawMaze(viewModel.getMaze());
-
         mazeDisplayer.drawTargetPosition(viewModel.getGoalRow(),viewModel.getGoalCol());
         mazeDisplayer.setPlayerPosition(0,0);
         playMedia(game_song_path);
@@ -345,6 +344,9 @@ public class MyViewController extends AView implements Initializable, Observer {
         this.mazeDisplayer.setSolution(null);
         this.mazeDisplayer.setHasSolution(false);
         this.solveButton.setDisable(false);
+        this.saveButton.setDisable(false);
+        this.loadButton.setDisable(false);
+
     }
 
 
