@@ -1,6 +1,7 @@
 package View;
 
 //import Model.MazeGenerator;
+import Model.Directions;
 import ViewModel.MyViewModel;
 import com.sun.media.jfxmedia.events.PlayerStateListener;
 import javafx.application.Platform;
@@ -25,10 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -381,6 +379,37 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     public void setUpdatePlayerCol(int updatePlayerCol) {
         this.updatePlayerCol.set(updatePlayerCol + "");
+    }
+
+    public void movmentOfMouse(MouseEvent mouseEvent) throws FileNotFoundException {
+        if (mazeDisplayer == null || (Integer.parseInt(getUpdatePlayerRow()) == viewModel.getGoalRow() && Integer.parseInt(getUpdatePlayerCol()) == viewModel.getGoalCol()))
+            return;
+        double mouseRow = (mouseEvent.getY());
+        double mouseCol = (mouseEvent.getX());
+        double cellHeight = mazeDisplayer.getCell_hight();
+        double cellWidth = mazeDisplayer.getCell_width();
+        int intplayerRow=Integer.parseInt(getUpdatePlayerRow());
+        int intplayerCol=Integer.parseInt(getUpdatePlayerCol());
+        if (intplayerRow + 1 < mouseRow / cellHeight && mouseRow / cellHeight <= intplayerRow + 2 && intplayerCol + 1 >= mouseCol / cellWidth && intplayerCol <= mouseCol / cellWidth) {// down
+            viewModel.updatePlayerLocation(Directions.DOWN);
+            //if (canMove(intplayerRow + 1, intplayerCol))
+                //setPlayerPosition(intplayerRow + 1, intplayerCol);
+        }
+        if (intplayerRow  > mouseRow / cellHeight && mouseRow / cellHeight + 1 >= intplayerRow && intplayerCol + 1 >= mouseCol / cellWidth && intplayerCol <= mouseCol / cellWidth) {// up
+            viewModel.updatePlayerLocation(Directions.UP);
+            //if (canMove(intplayerRow - 1, intplayerCol))
+                //setPlayerPosition(intplayerRow - 1, intplayerCol);
+        }
+        if (intplayerCol  > mouseCol / cellWidth && mouseCol / cellWidth + 1 >= intplayerCol && intplayerRow + 1 >= mouseRow / cellHeight && intplayerRow <= mouseRow / cellHeight) {// left
+            viewModel.updatePlayerLocation(Directions.LEFT);
+            //if (canMove(intplayerRow, intplayerCol - 1))
+                //setPlayerPosition(intplayerRow, intplayerCol - 1);
+        }
+        if (intplayerCol + 1 < mouseCol / cellWidth && mouseCol / cellWidth <= intplayerCol + 2 && intplayerRow + 1 >= mouseRow / cellHeight && intplayerRow <= mouseRow / cellHeight) {// right
+            viewModel.updatePlayerLocation(Directions.RIGHT);
+            //if (canMove(intplayerRow, intplayerCol + 1))
+                //setPlayerPosition(intplayerRow, intplayerCol + 1);
+        }
     }
 
     public void playFinalVideo(String videoPath) throws IOException {

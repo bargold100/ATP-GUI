@@ -54,6 +54,10 @@ public class MyViewModel extends Observable implements Observer {
 
     }
 
+    public void updatePlayerLocation(Directions d){
+        model.updatePlayerLocation(d);
+    }
+
     public void exitGame() { model.exitGame(); }
 
     //MAZE FILES

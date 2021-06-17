@@ -353,27 +353,27 @@ import java.util.Observer;
          return (row1>=0 && row1< model_maze.getRows() && col1>=0 && col1<model_maze.getColumns());
      }
      //searching zero on the right
-     private boolean CanMoveRight(int row1,int col1){
+     public boolean CanMoveRight(int row1,int col1){
          if(isGameOver)
              return false;
          return (isOnMap(row1,col1+1)&&((model_maze.getMap()[row1][col1+1])==0) );
      }
      //searching zero on the left
-     private boolean CanMoveLeft(int row1,int col1){
+     public boolean CanMoveLeft(int row1,int col1){
          if(isGameOver)
              return false;
          return ( isOnMap(row1,col1-1)&&((model_maze.getMap()[row1][col1-1])==0) );
      }
 
      //searching zero on the up side
-     private boolean CanMoveUp(int row1,int col1){
+     public boolean CanMoveUp(int row1,int col1){
          if(isGameOver)
              return false;
          return ( isOnMap(row1-1,col1)&&((model_maze.getMap()[row1-1][col1])==0) );
      }
 
      //searching zero on the down side
-     private boolean CanMoveDown(int row1,int col1){
+     public boolean CanMoveDown(int row1,int col1){
          if(isGameOver)
              return false;
          return ( isOnMap(row1+1,col1)&&((this.model_maze.getMap()[row1+1][col1])==0) );

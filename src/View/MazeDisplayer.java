@@ -25,6 +25,17 @@ public class MazeDisplayer extends Canvas {
     private int TargetRow;
     private int TargetCol;
 
+    public double getCell_hight() {
+        return cell_hight;
+    }
+
+    public double getCell_width() {
+        return cell_width;
+    }
+
+    private double cell_hight;
+    private double cell_width;
+
     public boolean getisHasSolution() {
         return hasSolution;
     }
@@ -148,7 +159,9 @@ public class MazeDisplayer extends Canvas {
             int cols = maze[0].length;
 
             double cellHeight = canvasHeight / rows;
+            cell_hight=cellHeight;
             double cellWidth = canvasWidth / cols;
+            cell_width=cellWidth;
 
             GraphicsContext graphicsContext = getGraphicsContext2D();
             //clear the canvas:
