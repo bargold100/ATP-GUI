@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="229.0" prefWidth="382.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ConfigWinController">
+<AnchorPane prefHeight="239.0" prefWidth="396.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ConfigWinController">
    <children>
-      <MenuButton layoutX="189.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="BestFirstSearch">
-        <items>
-          <MenuItem mnemonicParsing="false" text="BestFirstSearch" />
-          <MenuItem mnemonicParsing="false" text="DepthFirstSearch" />
-            <MenuItem mnemonicParsing="false" text="BestFirstSearch" />
-        </items>
-      </MenuButton>
-      <MenuButton layoutX="189.0" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="MyMazeGenerator">
-         <items>
-            <MenuItem mnemonicParsing="false" text="MyMazeGenerator" />
-            <MenuItem mnemonicParsing="false" text="EmptyMazeGenerator" />
-            <MenuItem mnemonicParsing="false" text="SimpleMazeGenerator" />
-         </items>
-      </MenuButton>
-      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose searching algorithm:  " wrappingWidth="169.13671875" />
-      <Text layoutX="14.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose searching algorithm:  " wrappingWidth="169.13671875" />
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose solving algorithm:  " wrappingWidth="169.13671875" />
+      <Text layoutX="14.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose generating algorithm:  " wrappingWidth="169.13671875" />
       <Text layoutX="14.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose threads number:  [between 1-20]" wrappingWidth="169.13671875" />
-      <TextField layoutX="189.0" layoutY="90.0" prefHeight="25.0" prefWidth="139.0" />
+      <TextField layoutX="189.0" layoutY="90.0" prefHeight="25.0" prefWidth="139.0" text="3" />
+      <Button fx:id="okButton" layoutX="76.0" layoutY="177.0" mnemonicParsing="false" onAction="#approveChanges" prefHeight="25.0" prefWidth="93.0" text="OK!" />
+      <Button fx:id="cancelButton" layoutX="212.0" layoutY="177.0" mnemonicParsing="false" onAction="#cancelChanges" prefHeight="25.0" prefWidth="93.0" text="Cancel" />
+      <ComboBox fx:id="Solver" layoutX="189.0" layoutY="47.0" prefHeight="25.0" prefWidth="139.0" />
+      <ComboBox fx:id="Generator" layoutX="189.0" layoutY="130.0" prefHeight="25.0" prefWidth="139.0" />
    </children>
 </AnchorPane>

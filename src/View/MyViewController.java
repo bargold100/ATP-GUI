@@ -135,16 +135,6 @@ public class MyViewController extends AView implements Initializable, Observer {
         OpenStage("DimentionsWin.fxml", actionEvent, 410, 220);
 
     }
-    //private void displayAlert(String title, String alert){
-     //   Alert displayedAlert = new Alert(Alert.AlertType.INFORMATION);
-     //   displayedAlert.setTitle(title);
-    //    displayedAlert.setContentText(alert);
-     //   displayedAlert.setHeaderText("");
-      //  DialogPane dialogPane = displayedAlert.getDialogPane();
-       // dialogPane.getStylesheets().add(getClass().getResource("alertStyle.css").toExternalForm());
-     //   dialogPane.getStyleClass().add("alertStyle");
-      //  displayedAlert.show();
-   // }
 
     public void help(){
         final String msg = "In this game, you are playing Yair Lapid,\n" +
@@ -175,7 +165,7 @@ public class MyViewController extends AView implements Initializable, Observer {
 
 
     public void Properties(ActionEvent actionEvent) throws IOException {
-
+        OpenStage("ConfigWin.fxml",actionEvent,430,430);
 
     }
 
@@ -309,11 +299,19 @@ public class MyViewController extends AView implements Initializable, Observer {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+
             }
             case "load" -> loaded();
             case "save" -> saved();
+            case "settings updated"->settingUpdated();
             default -> System.out.println("Not implemented change: " + change);
         }
+    }
+
+    public void settingUpdated(){
+        System.out.println("settings updated");
+        OpenAlert("Settings were updated successfully!","Settings update","info");
     }
     public void muteMusic(){
         if(muteButton.isSelected()) {

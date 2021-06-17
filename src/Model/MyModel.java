@@ -71,7 +71,7 @@ import java.util.Observer;
      @Override
     public void generateMaze(int rows, int cols) {
 
-
+         System.out.println("start generating....");
         // creating a client that will Communicating with generatingServer
         ClientCallToGenerateMaze(rows,cols);
         setChanged();
@@ -129,6 +129,8 @@ import java.util.Observer;
 
          setChanged();
          notifyObservers("maze solved");
+
+
      }
 
 
@@ -181,6 +183,17 @@ import java.util.Observer;
      }
 
 
+     public void setProperties(String key1,String val1,String key2,String val2,String key3, String val3) throws IOException {
+        Configurations.setProperty(key1,val1);
+        Configurations.setProperty(key2,val2);
+        Configurations.setProperty(key3,val3);
+       //  StopServers();
+       // GeneratorServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+        //SolveServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+        // StartServers();
+         setChanged();
+         notifyObservers("settings updated");
+     }
      public void saveMaze(File empty_file){
          try{
              FileOutputStream my_file = new FileOutputStream(empty_file);

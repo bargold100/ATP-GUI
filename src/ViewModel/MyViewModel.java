@@ -6,6 +6,7 @@ import algorithms.search.AState;
 import javafx.scene.input.KeyEvent;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -93,6 +94,8 @@ public class MyViewModel extends Observable implements Observer {
     public int getGoalRow(){ return model.getGoalRow(); }
 
     public int getGoalCol(){ return model.getGoalColumn(); }
+
+    public void setProperties(String key1,String val1,String key2,String val2,String key3,String val3) throws IOException { model.setProperties(key1,val1,key2,val2,key3,val3);};
 
 
 }
