@@ -4,33 +4,21 @@ import Client.*;
 import IO.MyDecompressorInputStream;
 import Model.IModel;
 import Model.MyModel;
-import Model.MyModel;
 import Server.Server;
-import ViewModel.MyViewModel;
 import ViewModel.MyViewModel;
 import Server.*;
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.awt.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Optional;
 
 public class Main extends Application {
 
@@ -42,7 +30,7 @@ public class Main extends Application {
         generateMaze(10, 10);
 
         //===============================================
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MyView.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Hello World");
         Scene Scene=new Scene(root, 1000, 700);

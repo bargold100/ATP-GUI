@@ -27,7 +27,7 @@ public abstract class AView implements IView {
 
     public void OpenStage(String fxmlname, ActionEvent actionEvent, int width, int hight){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlname));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlname));
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");

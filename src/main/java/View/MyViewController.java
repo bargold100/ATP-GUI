@@ -55,8 +55,8 @@ public class MyViewController extends AView implements Initializable, Observer {
     public MazeDisplayer mazeDisplayer;
     public Label playerRow;
     public Label playerCol;
-    public String game_song_path = "resources\\music\\tiger.mp3";
-    public String video_path = "resources\\videos\\finalvideo.mp4";
+    public String game_song_path = "src\\main\\resources\\music\\tiger.mp3";
+    public String video_path = "src\\main\\resources\\videos\\finalvideo.mp4";
     public BorderPane borderPane;
 
     @FXML
