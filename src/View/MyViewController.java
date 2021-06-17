@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.beans.value.ChangeListener;
@@ -27,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -59,6 +61,7 @@ public class MyViewController extends AView implements Initializable, Observer {
     public String video_path = "resources\\videos\\finalvideo.mp4";
     public BorderPane borderPane;
 
+    @FXML
     HBox hbox;
 
     //music:
@@ -107,6 +110,9 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     //BUTTUNS FUNCTIONS:
 
+    public MazeDisplayer getMazeDisplayer(){
+        return mazeDisplayer;
+    }
 
     public void playMedia(String song_path){
         if(mediaPlayer != null){
@@ -196,9 +202,6 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     }
 
-//    public void VolumeSlider(){
-//
-//    }
     public void solveMaze(ActionEvent actionEvent) {
         viewModel.solveMaze();
     }
@@ -367,6 +370,13 @@ public class MyViewController extends AView implements Initializable, Observer {
 
     public String getUpdatePlayerCol() {
         return updatePlayerCol.get();
+    }
+    public void Scroll(ScrollEvent scroll) throws FileNotFoundException {
+        if(scroll.isControlDown()){
+            mazeDisplayer.setHeight(mazeDisplayer.getHeight() + scroll.getDeltaY());
+            mazeDisplayer.setWidth(mazeDisplayer.getWidth() + scroll.getDeltaY());
+            mazeDisplayer.draw();
+        }
     }
 
     public void setUpdatePlayerCol(int updatePlayerCol) {

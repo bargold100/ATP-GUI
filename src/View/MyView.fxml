@@ -88,7 +88,7 @@
     <center>
         <Pane fx:id="MyMainPane" style="-fx-background-image: url(./resources/photoes/backgroungknesset.JPG) ;" BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" height="400.0" imageFileNameClue="./resources/photoes/clue.JPG" imageFileNamePlayer="./resources/photoes/lapid080621.JPG" imageFileNameTarget="./resources/photoes/benetgood.jpg" imageFileNameWall="./resources/photoes/bibi.JPG" onKeyPressed="#keyPressed" width="400.0" />
+                <MazeDisplayer fx:id="mazeDisplayer" height="400.0" imageFileNameClue="./resources/photoes/clue.JPG" imageFileNamePlayer="./resources/photoes/lapid080621.JPG" imageFileNameTarget="./resources/photoes/benetgood.jpg" imageFileNameWall="./resources/photoes/bibi.JPG" onKeyPressed="#keyPressed" onScroll="#Scroll" width="400.0" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
